@@ -8,14 +8,13 @@ El objetivo principal fue diseñar e implementar un sistema experto capaz de sim
 
 El sistema busca:
 
-[x] Recibir síntomas ingresados por el usuario
-[x] Analizar la combinación de síntomas presentes
-[x] Aplicar reglas predefinidas
-[x] Determinar una posible clasificación:
-
-  * Posible dengue
-  * Posible COVID-19
-  * Diagnóstico indeterminado
+- Recibir síntomas ingresados por el usuario
+- Analizar la combinación de síntomas presentes
+- Aplicar reglas predefinidas
+- Determinar una posible clasificación:
+  - Posible dengue
+  - Posible COVID-19
+  - Diagnóstico indeterminado
 
 
 ### Tipo de sistema
