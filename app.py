@@ -300,12 +300,16 @@ if ver_reglas:
     reglas_ordenadas = sorted(reglas,key=lambda r: int(r.id.replace("R", "")))
 
     for r in reglas_ordenadas:
+
         with st.expander(f"{r.id} — {r.nombre}"):
-            st.markdown(f"""### {r.id} — {r.nombre}
-            - Impacto Dengue: **{r.certeza_dengue}**
-            - Impacto COVID: **{r.certeza_covid}**
-            - Prioridad: **{r.prioridad}**
-            """)
+
+            st.markdown(f"""
+    ### {r.id} — {r.nombre}
+
+    - Impacto Dengue: **{r.certeza_dengue}**
+    - Impacto COVID: **{r.certeza_covid}**
+    - Prioridad: **{r.prioridad}**
+    """)
 
             st.divider()
             st.subheader("🔗 Grafo de Inferencia")
