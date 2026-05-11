@@ -102,11 +102,16 @@ Las prioridades permiten establecer diferentes niveles de relevancia clínica o 
 Por ejemplo, definimos distintas reglas que poseen mayor prioridad debido a su importancia diagnóstica, como ser:
 
 ✅ sangrado espontáneo
+
 ✅ dificultad respiratoria
+
 ✅ brotes epidemiológicos
 
 Además, el sistema implementa un mecanismo de ponderación de evidencias mediante puntajes asociados a Dengue y COVID-19.Estos valores permiten reforzar la sospecha diagnóstica a medida que múltiples reglas se activan simultáneamente.
 
+<p align="center">
+  <img src="assets/MecanismoPonderacion.png" width="700">
+</p>
 
 
 ## Representación visual del conocimiento
