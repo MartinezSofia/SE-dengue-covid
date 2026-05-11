@@ -1,21 +1,24 @@
+## 🧠 Sistema Experto Determinístico Basado en Reglas
+
 En este trabajo se desarrolló un sistema experto basado en reglas orientado a la identificación preliminar de dos enfermedades: dengue y COVID-19. El sistema permite ingresar síntomas de un paciente y, a partir de un conjunto de reglas previamente definidas, determina si existe una mayor probabilidad de que el paciente presente dengue, COVID-19 o si el diagnóstico resulta indeterminado.
 
+### Objetivo
 
 El objetivo principal fue diseñar e implementar un sistema experto capaz de simular el razonamiento básico de un profesional de la salud mediante reglas de inferencia.
 
 El sistema busca:
 
-* Recibir síntomas ingresados por el usuario
-* Analizar la combinación de síntomas presentes
-* Aplicar reglas predefinidas
-* Determinar una posible clasificación:
+[x] Recibir síntomas ingresados por el usuario
+[x] Analizar la combinación de síntomas presentes
+[x] Aplicar reglas predefinidas
+[x] Determinar una posible clasificación:
 
   * Posible dengue
   * Posible COVID-19
   * Diagnóstico indeterminado
 
 
-**-Tipo de sistema inteligente**
+### Tipo de sistema
 
 El proyecto se clasifica como un sistema experto basado en reglas.
 
@@ -31,7 +34,7 @@ Por ejemplo:
 Estas reglas permiten que el sistema tome decisiones sin necesidad de aprendizaje automático, redes neuronales o modelos probabilísticos complejos.
 
 
-**-Tecnologías utilizadas**
+## Tecnologías utilizadas
 
 Para el desarrollo del sistema se utilizaron las siguientes herramientas:
 
@@ -41,7 +44,7 @@ Para el desarrollo del sistema se utilizaron las siguientes herramientas:
 * Lógica booleana para la inferencia de resultados
 * GitHub para el control de versiones y almacenamiento del proyecto
 
-**-Funcionamiento del sistema**
+## Funcionamiento del sistema
 
 El sistema funciona a partir del ingreso manual de síntomas por parte del usuario.
 
@@ -67,7 +70,7 @@ Ejemplo de reglas implementadas
 Finalmente, el sistema devuelve al usuario el diagnóstico preliminar más probable.
 
 
-**-Base de conocimiento**
+## Base de conocimiento
 
 La base de conocimiento está compuesta por el conjunto de síntomas relevantes y las reglas médicas utilizadas para inferir una posible enfermedad.
 
@@ -75,7 +78,7 @@ Estas reglas fueron construidas considerando síntomas característicos de dengu
 
 
 
-**-Posibles mejoras futuras**
+## Posibles mejoras futuras
 
 Como mejoras futuras del sistema se podrían incorporar:
 
@@ -88,7 +91,7 @@ Como mejoras futuras del sistema se podrían incorporar:
 Estas mejoras permitirían transformar el proyecto en una herramienta más robusta y aplicable a contextos reales.
 
 
-**-Conclusión**
+## Conclusión
 
 El desarrollo de este sistema experto permitió aplicar conceptos fundamentales de inteligencia artificial relacionados con representación del conocimiento, motores de inferencia y toma de decisiones basada en reglas.
 
