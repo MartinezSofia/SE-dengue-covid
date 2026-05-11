@@ -64,7 +64,6 @@ class Regla:
         self.certeza_dengue = certeza_dengue  # delta de certeza para dengue (-100 a +100)
         self.certeza_covid = certeza_covid    # delta de certeza para COVID  (-100 a +100)
         self.prioridad = prioridad             # orden de aplicación
-        self.disparada = False
 
 
 def construir_base_conocimiento():
@@ -417,8 +416,6 @@ class MotorInferencia:
         # Ciclo de disparo de reglas (agenda-based forward chaining)
         for regla in self.reglas:
             if regla.condicion_fn(hechos):
-                # La condición se cumple → disparar regla
-                regla.disparada = True
                 self.reglas_disparadas.append(regla)
 
                 # Actualizar certezas (con límites)
@@ -472,44 +469,3 @@ class MotorInferencia:
             return "DIAGNÓSTICO DIFERENCIAL: DENGUE / COVID-19 — Requiere laboratorio"
         else:
             return "EVIDENCIA INSUFICIENTE — Requiere evaluación clínica adicional"
-
-    def reporte(self):
-        """Genera el reporte del sistema experto."""
-        lineas = []
-        lineas.append("=" * 65)
-        lineas.append("   SISTEMA EXPERTO — DETECCIÓN DE DENGUE / COVID-19")
-        lineas.append("=" * 65)
-        lineas.append(f"\n📋 REGLAS TOTALES EN BASE DE CONOCIMIENTO: {len(self.reglas)}")
-        lineas.append(f"✅ REGLAS DISPARADAS: {len(self.reglas_disparadas)}")
-        lineas.append(f"❌ REGLAS NO APLICABLES: {len(self.reglas) - len(self.reglas_disparadas)}")
-
-        lineas.append("\n" + "-" * 65)
-        lineas.append("  TRAZA DE INFERENCIA (Forward Chaining)")
-        lineas.append("-" * 65)
-
-        for evento in self.traza:
-            if evento["tipo"] == "INICIO":
-                lineas.append(f"\n[INICIO] {evento['descripcion']}")
-            elif evento["tipo"] == "REGLA_DISPARADA":
-                d_str = f"+{evento['delta_dengue']}" if evento['delta_dengue'] >= 0 else str(evento['delta_dengue'])
-                c_str = f"+{evento['delta_covid']}"  if evento['delta_covid']  >= 0 else str(evento['delta_covid'])
-                lineas.append(f"\n[{evento['regla_id']}] {evento['regla_nombre']}")
-                lineas.append(f"     → {evento['descripcion']}")
-                lineas.append(f"     Δ Dengue: {d_str}%  |  Δ COVID: {c_str}%")
-                lineas.append(f"     Acumulado → Dengue: {evento['certeza_dengue']}%  |  COVID: {evento['certeza_covid']}%")
-            elif evento["tipo"] == "CONCLUSION":
-                lineas.append(f"\n{'=' * 65}")
-                lineas.append(f"  CONCLUSIÓN: {evento['descripcion']}")
-
-        lineas.append("\n" + "=" * 65)
-        lineas.append("  RESULTADO FINAL")
-        lineas.append("=" * 65)
-        lineas.append(f"\n  🦟 DENGUE  → Certeza: {self.certeza_dengue}%")
-        lineas.append(f"  🦠 COVID-19 → Certeza: {self.certeza_covid}%")
-        clasificacion = self._clasificar()
-        lineas.append(f"\n  📌 CLASIFICACIÓN: {clasificacion}")
-        lineas.append("\n  NOTA: Este sistema experto es una herramienta de apoyo")
-        lineas.append("  diagnóstico. No reemplaza el criterio médico clínico.")
-        lineas.append("=" * 65)
-
-        return "\n".join(lineas)

@@ -260,9 +260,7 @@ if analizar:
     # DETALLE DEL ANÁLISIS
     with st.expander("📑 Ver detalle completo del análisis"):
 
-        reglas_ordenadas = sorted(motor.reglas_disparadas,key=lambda r: int(r.id.replace("R", "")))
-
-        for regla in reglas_ordenadas:
+        for regla in motor.reglas_disparadas:
 
             with st.expander(f"{regla.id} — {regla.nombre}"):
                 st.write(regla.accion) #descripcion
