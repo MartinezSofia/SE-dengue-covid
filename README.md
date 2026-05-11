@@ -64,9 +64,7 @@ que fueron ingresados por el usuario desde la interfaz.
 Ejemplo:
 
 fiebre = True
-
 tos = True
-
 dolor_garganta = True
 
 Cada dato ingresado por el usuario desde la interfaz se transforma internamente en hechos lógicos booleanos.
@@ -96,17 +94,20 @@ Cada regla posee además:
  - una prioridad
  - valores de impacto o certeza.
 
+<p align="center">
+  <img src="assets/Reglas- certeza y prioridad.png" width="700">
+</p>
+
 Las prioridades permiten establecer diferentes niveles de relevancia clínica o epidemiológica.
 Por ejemplo, definimos distintas reglas que poseen mayor prioridad debido a su importancia diagnóstica, como ser:
 
 ✅ sangrado espontáneo
-
 ✅ dificultad respiratoria
-
 ✅ brotes epidemiológicos
 
+Además, el sistema implementa un mecanismo de ponderación de evidencias mediante puntajes asociados a Dengue y COVID-19.Estos valores permiten reforzar la sospecha diagnóstica a medida que múltiples reglas se activan simultáneamente.
 
-Además, el sistema implementa acumulación heurística de evidencia mediante puntajes asociados a Dengue y COVID-19.Estos valores permiten reforzar la sospecha diagnóstica a medida que múltiples reglas se activan simultáneamente.
+
 
 ## Representación visual del conocimiento
 Como complemento explicativo, se incorporó un sistema de visualización de inferencias mediante grafos interactivos.
@@ -118,6 +119,10 @@ Para esto utilizamos un módulo de Python denominado Pyvis, el cual nos permiti�
 - relaciones de inferencia
 
 Estos grafos permiten visualizar el flujo de razonamiento del motor de inferencia y cómo múltiples hechos pueden activar diferentes reglas y conclusiones
+
+<p align="center">
+  <img src="assets/Ejemplo grafo de inferencia.png" width="700">
+</p>
 
 ## Tecnologías utilizadas
 
