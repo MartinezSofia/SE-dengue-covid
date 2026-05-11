@@ -5,31 +5,29 @@ Arquitectura: Sistema basado en reglas determinísticas (Forward Chaining)
 Enfoque académico: Reglas IF-THEN con certeza y trazabilidad completa
 """
 
-# ===========================================================================
-# BASE DE HECHOS (Working Memory)
-# ===========================================================================
+# =====================
+# MEMORIA DE TRABAJO
+# =====================
 
 class HechosPaciente:
-    """Representa el estado del paciente como hechos observables."""
-
     def __init__(self):
         # --- Síntomas clínicos ---
         self.fiebre = False
-        self.fiebre_alta = False          # >= 39°C
+        self.fiebre_alta = False
         self.tos = False
         self.tos_seca = False
         self.dolor_garganta = False
         self.dolor_cabeza = False
         self.dolor_muscular = False
         self.dolor_articular = False
-        self.dolor_retroorbital = False   # detrás de los ojos (muy específico de dengue)
-        self.erupcion_cutanea = False     # rash (muy específico de dengue)
+        self.dolor_retroorbital = False   # detrás de los ojos 
+        self.erupcion_cutanea = False 
         self.nauseas_vomitos = False
-        self.perdida_olfato_gusto = False # muy específico de COVID
+        self.perdida_olfato_gusto = False 
         self.dificultad_respiratoria = False
         self.fatiga = False
         self.escalofrios = False
-        self.sangrado = False             # señal de alarma dengue grave
+        self.sangrado = False   
 
         # --- Epidemiología ---
         self.viaje_zona_endemica_dengue = False
@@ -39,46 +37,19 @@ class HechosPaciente:
         self.zona_circulacion_covid = False
 
         # --- Contexto geográfico/temporal ---
-        self.residencia_zona_endemica = False  # Corrientes = zona endémica
-        self.epoca_verano = False              # mayor riesgo dengue
+        self.residencia_zona_endemica = False 
+        self.epoca_verano = False              
         self.prevalencia_dengue_alta = False
         self.prevalencia_covid_activa = False
 
-        # --- Datos del paciente ---
-        self.edad = None
-        self.sexo = None
+        # --- Antecedentes/historia clínica del paciente ---
         self.antecedente_asma = False
-        self.toma_antihipertensivos = False    # IECA/ARA2 → mayor riesgo COVID grave
+        self.toma_antihipertensivos = False  
         self.inmunocomprometido = False
 
-    def cargar_caso_enunciado(self):
-        """Carga exactamente el caso descrito en el enunciado del trabajo."""
-        # Síntomas presentados
-        self.fiebre = True
-        self.tos = True
-        self.dolor_garganta = True
-
-        # Datos del paciente
-        self.edad = 35
-        self.sexo = "masculino"
-        self.antecedente_asma = True
-        self.toma_antihipertensivos = True
-
-        # Epidemiología
-        self.viaje_zona_endemica_dengue = True   # viajó a Brasil (2 semanas)
-        self.contacto_caso_dengue = True          # familiar con dengue
-
-        # Contexto geográfico
-        self.residencia_zona_endemica = True      # Corrientes, Argentina
-        self.prevalencia_dengue_alta = True       # época de verano en Corrientes
-        self.prevalencia_covid_activa = True      # COVID circulando activamente
-        self.zona_brote_dengue = True             # brote reciente en zona cercana
-        self.epoca_verano = True
-
-
-# ===========================================================================
-# BASE DE CONOCIMIENTO (Knowledge Base)
-# ===========================================================================
+# ======================
+# BASE DE CONOCIMIENTO 
+# ======================
 
 class Regla:
     """Representa una regla IF-THEN del sistema experto."""
@@ -87,9 +58,9 @@ class Regla:
         self.id = id
         self.nombre = nombre
         self.condicion_fn = condicion_fn      # función que evalúa la condición
-        self.condiciones = condiciones
-        self.conclusion = conclusion
-        self.accion = accion                   # descripción de lo que hace la regla
+        self.condiciones = condiciones        # hechos (utilizado para la representacion del grafo de inferencia)
+        self.conclusion = conclusion          # utilizado para la representacion del grafo de inferencia
+        self.accion = accion                  # descripción de lo que hace la regla
         self.certeza_dengue = certeza_dengue  # delta de certeza para dengue (-100 a +100)
         self.certeza_covid = certeza_covid    # delta de certeza para COVID  (-100 a +100)
         self.prioridad = prioridad             # orden de aplicación
@@ -228,7 +199,7 @@ def construir_base_conocimiento():
         ),
 
         # ===================================================================
-        # GRUPO 3: EPIDEMIOLOGÍA (factor más diferenciador según enunciado)
+        # GRUPO 3: EPIDEMIOLOGÍA 
         # ===================================================================
 
         Regla(
@@ -328,7 +299,7 @@ def construir_base_conocimiento():
         ),
 
         # ===================================================================
-        # GRUPO 5: ANTECEDENTES Y COMORBILIDADES
+        # GRUPO 5: ANTECEDENTES 
         # ===================================================================
 
         Regla(
@@ -402,9 +373,9 @@ def construir_base_conocimiento():
     return sorted(reglas, key=lambda r: r.prioridad)
 
 
-# ===========================================================================
-# MOTOR DE INFERENCIA (Inference Engine — Forward Chaining)
-# ===========================================================================
+# ========================
+# MOTOR DE INFERENCIA 
+# ========================
 
 class MotorInferencia:
     """
@@ -470,7 +441,7 @@ class MotorInferencia:
                     "certeza_covid": self.certeza_covid,
                 })
 
-        # Conclusión final
+        # Conclusión
         diagnostico = self._clasificar()
         self.traza.append({
             "paso": len(self.traza),
@@ -494,16 +465,16 @@ class MotorInferencia:
         elif c >= 70 and c > d * 1.5:
             return "SOSPECHA ALTA DE COVID-19"
         elif d >= 50 and d > c:
-            return "SOSPECHA MODERADA DE DENGUE (COVID como diferencial)"
+            return "SOSPECHA MODERADA DE DENGUE (No se descarta que pueda tratarse de COVID)"
         elif c >= 50 and c > d:
-            return "SOSPECHA MODERADA DE COVID-19 (Dengue como diferencial)"
+            return "SOSPECHA MODERADA DE COVID-19 (No se descarta que pueda tratarse de Dengue)"
         elif d >= 40 or c >= 40:
             return "DIAGNÓSTICO DIFERENCIAL: DENGUE / COVID-19 — Requiere laboratorio"
         else:
             return "EVIDENCIA INSUFICIENTE — Requiere evaluación clínica adicional"
 
     def reporte(self):
-        """Genera el reporte explicativo completo del sistema experto."""
+        """Genera el reporte del sistema experto."""
         lineas = []
         lineas.append("=" * 65)
         lineas.append("   SISTEMA EXPERTO — DETECCIÓN DE DENGUE / COVID-19")
