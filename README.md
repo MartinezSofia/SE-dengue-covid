@@ -64,7 +64,9 @@ que fueron ingresados por el usuario desde la interfaz.
 Ejemplo:
 
 fiebre = True
+
 tos = True
+
 dolor_garganta = True
 
 Cada dato ingresado por el usuario desde la interfaz se transforma internamente en hechos lógicos booleanos.
@@ -98,7 +100,9 @@ Las prioridades permiten establecer diferentes niveles de relevancia clínica o 
 Por ejemplo, definimos distintas reglas que poseen mayor prioridad debido a su importancia diagnóstica, como ser:
 
 ✅ sangrado espontáneo
+
 ✅ dificultad respiratoria
+
 ✅ brotes epidemiológicos
 
 
