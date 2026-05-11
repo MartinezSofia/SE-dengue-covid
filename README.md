@@ -33,7 +33,7 @@ Por ejemplo:
 Estas reglas permiten que el sistema tome decisiones sin necesidad de aprendizaje automático, redes neuronales o modelos probabilísticos complejos.
 
 
-### 🧩 Componentes del sistema experto
+### Componentes del sistema experto
 
 ### 1️⃣ Base de Conocimiento
 La base de conocimiento está compuesta por el conjunto de síntomas relevantes y las reglas médicas utilizadas para inferir una posible enfermedad.
