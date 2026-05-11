@@ -33,8 +33,9 @@ Por ejemplo:
 Estas reglas permiten que el sistema tome decisiones sin necesidad de aprendizaje automático, redes neuronales o modelos probabilísticos complejos.
 
 
-#### 🧩 Componentes del sistema experto
-1️⃣ **Base de Conocimiento**
+### 🧩 Componentes del sistema experto
+
+### 1️⃣ Base de Conocimiento
 La base de conocimiento está compuesta por el conjunto de síntomas relevantes y las reglas médicas utilizadas para inferir una posible enfermedad.
 Estas reglas, a las que llamamos *reglas de producción* fueron construidas considerando síntomas característicos de dengue y COVID-19, especialmente aquellos que permiten diferenciarlos en una primera evaluación.
 
@@ -48,7 +49,7 @@ Cada regla contiene:
 * conclusión inferida.
 
 
-2️⃣ **Memoria de Trabajo**
+### 2️⃣ Memoria de Trabajo
 
 Contiene toda la información que el sistema conoce temporalmente durante una evaluación clínica.
 La memoria de trabajo almacena:
@@ -61,13 +62,14 @@ La memoria de trabajo almacena:
 que fueron ingresados por el usuario desde la interfaz.
    
 Ejemplo:
+
 fiebre = True
 tos = True
 dolor_garganta = True
 
 Cada dato ingresado por el usuario desde la interfaz se transforma internamente en hechos lógicos booleanos.
 
-3️⃣ **Motor de Inferencia**
+### 3️⃣ Motor de Inferencia
 
 Es el núcleo lógico del sistema, el cual se encarga de:
  - recorrer las reglas
@@ -94,6 +96,7 @@ Cada regla posee además:
 
 Las prioridades permiten establecer diferentes niveles de relevancia clínica o epidemiológica.
 Por ejemplo, definimos distintas reglas que poseen mayor prioridad debido a su importancia diagnóstica, como ser:
+
 ✅ sangrado espontáneo
 ✅ dificultad respiratoria
 ✅ brotes epidemiológicos
@@ -104,6 +107,7 @@ Además, el sistema implementa acumulación heurística de evidencia mediante pu
 ## Representación visual del conocimiento
 Como complemento explicativo, se incorporó un sistema de visualización de inferencias mediante grafos interactivos.
 Para esto utilizamos un módulo de Python denominado Pyvis, el cual nos permitió desarrollar grafos interactivos para representar:
+
  - hechos
  - reglas
 - conclusiones
